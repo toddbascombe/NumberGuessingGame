@@ -40,8 +40,13 @@ def start_game():
 
     # continuously display the user to guess a number
     while True:
+        try:
 
-        user_input = int(input("Guess a number: "))
+            user_input = int(input("Guess a number: "))
+        except ValueError:
+            print("Incorrect value, try again")
+            continue
+
         user_answers.append(user_input)
 
         # the player can not add a number outside 0 - 10
