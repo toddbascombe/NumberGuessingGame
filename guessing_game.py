@@ -12,10 +12,23 @@ NOTE: If you strongly prefer to work locally on your own computer, you can total
 import random
 
 
+# compares the current_score to the high_score
+def score_compare(current_score, high_score):
+    if high_score == 0:
+        return current_score
+    elif high_score > 0 and current_score < high_score:
+        return current_score
+    else:
+        return high_score
+
+
 # create a reset function for reset the answers and solutions
 def reset(answer):
     del answer[:]
     start_game()
+
+
+highScore = 0
 
 
 # (function) Display Welcome message to the player
@@ -26,7 +39,8 @@ def welcome_message():
     *########################################  
     
     How to: Guess the number between 0 and 10
-    """)
+    The High Score is {}
+    """.format(highScore))
 
 
 def start_game():
@@ -65,6 +79,8 @@ def start_game():
             user_option = input("Do you want to play again [Y] yes [N] No : ")
 
             if user_option.upper() == 'Y':
+                global highScore
+                highScore = score_compare(len(user_answers), highScore)
                 reset(user_answers)
 
             else:
